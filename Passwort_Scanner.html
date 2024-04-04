@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Scanner</title>
+</head>
+<body>
+    <h1>Password Scanner</h1>
+    <form id="myForm">
+        <input type="password" id="password" placeholder="Passwort Eingeben">
+        <button type="submit">Check dein Passwort</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("myForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                var password = document.getElementById("password").value;
+                var uppercase = /[A-Z]/.test(password);
+                var lowercase = /[a-z]/.test(password);
+                var number = /[0-9]/.test(password);
+                var specialChars = /[\W_]/.test(password); // \W entspricht nicht alphanumerischen Zeichen
+
+                if (!uppercase || !lowercase || !number || !specialChars || password.length < 8) {
+                    document.getElementById("message").textContent = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+                } else {
+                    document.getElementById("message").textContent = 'Strong password.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
